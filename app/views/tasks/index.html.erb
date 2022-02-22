@@ -1,15 +1,24 @@
-<h1>Tasks</h1>
-<ul>
- <% @tasks.each do |task| %>
-  <li>
-    <%= link_to("#{task.title}", task_path(task)) %>
-    <span><%= link_to(
-      "Delete #{task.title}",
-      destroy_path(task),
-      method: :delete,
-      data: { confirm: 'Are you sure?'}
-    ) %></span>
-  </li>
- <% end %>
-</ul>
-<%= link_to("Add task", tasks_new_path)%>
+<h1 class="mt-4">Tasks</h1>
+<div class="card mt-3">
+  <ul class="list-group list-group-flush">
+  <% @tasks.each do |task| %>
+    <li class="task list-group-item">
+      <% if task.completed %>
+        <%= fa_stacked_icon "check", base: "square-o" %>
+      <% else %>
+        <%= fa_stacked_icon "", base: "square-o" %>
+      <% end %>
+      <%= link_to "#{task.title}", task_path(task), class: "task-name" %>
+      <%= link_to task_path(task), method: :delete, data: { confirm: 'Are you sure?'}, class: "task-remove" do %>
+        <%= fa_icon "solid trash can" %>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+<hr>
+<div class="ml-0">
+  <%= link_to new_task_path, class: "btn btn-outline-secondary" do %>
+    <%= fa_stacked_icon "plus", base: "solid" %><span>Add task</span>
+  <% end %>
+</div>

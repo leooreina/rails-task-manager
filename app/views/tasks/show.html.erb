@@ -1,10 +1,16 @@
-<h2><%= @task.title %></h2>
-<p><%= @task.details %></p>
-<p><%= @task.completed %></p>
+<div class="alert alert-secondary mt-4">
+  <h2><%= @task.title %></h2>
+  <p><strong>Details:</strong> <%= @task.details %></p>
+  <p><strong>Completed:</strong> <%= @task.completed ? 'Completed' : 'Not completed' %></p>
+</div>
 
 <div>
-  <%= link_to("Edit task", edit_path(@task)) %>
+  <%= link_to edit_task_path(@task), class: "btn btn-outline-secondary" do %>
+    <%= fa_stacked_icon "pencil", base: "solid", class: "mr-3" %>Edit task
+  <% end %>
 </div>
 <div>
-  <%= link_to("Back to list", tasks_path) %>
+  <%= link_to tasks_path, class: "btn btn-outline-secondary mt-2" do %>
+    <%= fa_stacked_icon "rotate-left", base: "solid", class: "mr-3" %>Back to list
+  <% end %>
 </div>
